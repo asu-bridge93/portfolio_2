@@ -848,30 +848,30 @@ def forecasting_page():
         
         model_name = f"Polynomial Regression (degree={degree})"
     
-    else:  # SARIMA
-        # Prepare data for SARIMA
-        ts_series = pd.Series(y, index=pd.DatetimeIndex(ts_data['ds']))
+    # else:  # SARIMA
+    #     # Prepare data for SARIMA
+    #     ts_series = pd.Series(y, index=pd.DatetimeIndex(ts_data['ds']))
         
-        # Fit SARIMA model
-        model = sm.tsa.statespace.SARIMAX(
-            ts_series,
-            order=(1, 1, 1),
-            seasonal_order=(1, 1, 1, 7),
-            enforce_stationarity=False,
-            enforce_invertibility=False
-        )
+    #     # Fit SARIMA model
+    #     model = sm.tsa.statespace.SARIMAX(
+    #         ts_series,
+    #         order=(1, 1, 1),
+    #         seasonal_order=(1, 1, 1, 7),
+    #         enforce_stationarity=False,
+    #         enforce_invertibility=False
+    #     )
         
-        results = model.fit(disp=False)
+    #     results = model.fit(disp=False)
         
-        # Make predictions
-        y_pred = results.fittedvalues
-        y_future = results.forecast(steps=forecast_days)
+    #     # Make predictions
+    #     y_pred = results.fittedvalues
+    #     y_future = results.forecast(steps=forecast_days)
         
-        # Calculate metrics
-        mse = mean_squared_error(ts_series[1:], y_pred[1:])
-        r2 = r2_score(ts_series[1:], y_pred[1:])
+    #     # Calculate metrics
+    #     mse = mean_squared_error(ts_series[1:], y_pred[1:])
+    #     r2 = r2_score(ts_series[1:], y_pred[1:])
         
-        model_name = "SARIMA(1,1,1)(1,1,1,7)"
+    #     model_name = "SARIMA(1,1,1)(1,1,1,7)"
     
     # Create forecast dataframe
     forecast_df = pd.DataFrame({
